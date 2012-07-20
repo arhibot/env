@@ -1,0 +1,21 @@
+# set defaul editor
+export EDITOR="emacs -nw"
+
+
+# debian vars
+export EMAIL="##email##"
+export DEBFULLNAME="##fullname##"
+export DEBEMAIL="##email##"
+
+
+# aliases
+alias dch='dch --distributor=debian'
+alias diff=colordiff
+alias json="python -c 'import json, sys;json.dump(json.load(sys.stdin), sys.stdout, indent=2)'"
+
+alias emc="make compile"
+alias emk="make console"
+
+
+# ENV variables
+export PATH=$PATH:$HOME/bin/

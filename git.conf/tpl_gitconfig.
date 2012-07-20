@@ -1,0 +1,18 @@
+[alias]
+	ci = commit
+	st = status
+        pl = log --oneline
+        sc = log -1
+	unstage = reset HEAD
+        lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+[user]
+	email = ##email##
+	name = ##fullname##
+[color]
+	branch = auto
+	diff = auto
+	interactive = auto
+	status = auto
+[core]
+	editor = emacs -nw
+	quotepath = off
