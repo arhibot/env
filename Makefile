@@ -23,7 +23,7 @@ devtools:
 
 git_prompt: devtools
 	rm -rf $(DEVTOOLS_DIR)/git-prompt && git clone git://github.com/lvv/git-prompt.git $(DEVTOOLS_DIR)/git-prompt
-	echo "[[ $- == *i* ]] && . $(DEVTOOLS_DIR)/git-prompt/git-prompt.sh" >> bash.conf/.common_config
+	echo '[[ $$- == *i* ]] && . $(DEVTOOLS_DIR)/git-prompt/git-prompt.sh' >> bash.conf/.common_config
 
 
 # Simple dots configs

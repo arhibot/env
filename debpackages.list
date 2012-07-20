@@ -1,4 +1,5 @@
 emacs-snapshot
+pylint
 git
 ipython
 virtualenvwrapper
