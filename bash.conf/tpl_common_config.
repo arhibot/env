@@ -15,6 +15,7 @@ alias json="python -c 'import json, sys;json.dump(json.load(sys.stdin), sys.stdo
 
 alias emc="make compile"
 alias emk="make console"
+alias tm="tmux attach || tmux new"
 
 
 # ENV variables

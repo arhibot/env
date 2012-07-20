@@ -3,3 +3,4 @@ pylint
 git
 ipython
 virtualenvwrapper
+tmux
