@@ -32,6 +32,6 @@ kerl: devtools
 
 
 # Simple dots configs
-dotsconfs: $(addsuffix -dots, git.conf tmux.conf bash.conf)
+dotsconfs: create_configs $(addsuffix -dots, git.conf tmux.conf bash.conf kerl.conf)
 %-dots:
 	/bin/bash -c "cp $*/.[^.]* $(HOME)/"

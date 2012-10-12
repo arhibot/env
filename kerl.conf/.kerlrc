@@ -1,0 +1,3 @@
+KERL_CONFIGURE_OPTIONS="--enable-hipe --enable-smp-support --enable-threads
+                        --enable-kernel-poll"
+
