@@ -25,6 +25,11 @@ git_prompt: devtools
 	rm -rf $(DEVTOOLS_DIR)/git-prompt && git clone git://github.com/lvv/git-prompt.git $(DEVTOOLS_DIR)/git-prompt
 	echo '[[ $$- == *i* ]] && . $(DEVTOOLS_DIR)/git-prompt/git-prompt.sh' >> bash.conf/.common_config
 
+kerl: devtools
+	curl https://raw.github.com/spawngrid/kerl/master/kerl -o $(HOME)/bin/kerl
+	chmod a+x $(HOME)/bin/kerl
+	kerl update releases
+
 
 # Simple dots configs
 dotsconfs: $(addsuffix -dots, git.conf tmux.conf bash.conf)
