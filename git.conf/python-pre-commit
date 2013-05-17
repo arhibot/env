@@ -1,0 +1,51 @@
+#!/bin/bash
+
+run_checker()
+{
+    FILES=$1
+    CHECKER_NAME=$2
+    CHECKER_CMD=$3
+    echo -e "\e[00;33m$CHECKER_NAME checking...\e[00m"
+    ERRORS=0
+    for file in $FILES; do
+        COUNT_LINES=$(git cat-file blob $(git ls-files -s $file | awk '{print $2}') | $CHECKER_CMD | wc -l)
+        if [ $COUNT_LINES -ne 0 ]; then
+            git cat-file blob $(git ls-files -s $file | awk '{print $2}') | $CHECKER_CMD | sed -r "s,^<?stdin>?,  ${file},"
+            ERRORS=`expr $ERRORS + $COUNT_LINES`
+        fi;
+    done;
+
+    if [ $ERRORS -ne 0 ]; then
+        echo -e "\e[00;31mCheck $CHECKER_NAME: $ERRORS errors\e[00m\n"
+    else
+        echo -e "\e[00;32mCheck $CHECKER_NAME: OK!\e[00m\n"
+    fi
+    return $ERRORS
+}
+
+CHANGES=$(git diff --name-only --cached --diff-filter="A|C|M" | grep -E ".py$")
+if [ -z "$CHANGES" ]; then
+    exit 0
+fi
+
+EXIT_CODE=0
+
+if [[ "$(pep8 --version)" < "1.4.4" ]]; then
+    run_checker "$CHANGES" "PEP8" "pep8 /dev/stdin --ignore=E501,E128"
+else
+    run_checker "$CHANGES" "PEP8" "pep8 - --ignore=E501,E128"
+fi
+
+PEP8_ERRORS=$?
+if [ $PEP8_ERRORS -ne 0 ]; then
+    EXIT_CODE=1
+fi
+
+run_checker "$CHANGES" "PyFlakes" "pyflakes"
+PYFLAKES_ERRORS=$?
+if [ $PYFLAKES_ERRORS -ne 0 ]; then
+   EXIT_CODE=1
+fi
+
+exit $EXIT_CODE
+
